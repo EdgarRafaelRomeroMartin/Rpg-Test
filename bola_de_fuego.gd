@@ -1,0 +1,23 @@
+extends Area2D
+
+@export var speed = 200  
+@export var max_distance = 500  
+var start_position = Vector2.ZERO
+var direccion = Vector2.ZERO  
+
+func _ready():
+	start_position = position
+	connect("body_entered", Callable(self, "_on_body_entered"))  
+
+func _physics_process(delta):
+	position += direccion * speed * delta  
+	if position.distance_to(start_position) > max_distance:
+		queue_free()  
+
+func _on_body_entered(body):
+	if body.is_in_group("Jugador"):  
+		body.take_damage(1)  
+		queue_free()
+
+func set_direccion(nueva_direccion: Vector2):
+	direccion = nueva_direccion

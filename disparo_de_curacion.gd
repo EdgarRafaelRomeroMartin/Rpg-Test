@@ -5,7 +5,7 @@ extends Area2D
 
 var start_position = Vector2.ZERO
 var direccion = Vector2.ZERO  
-var daño = 50  
+var daño = -50  
 
 func _ready():
 	start_position = position

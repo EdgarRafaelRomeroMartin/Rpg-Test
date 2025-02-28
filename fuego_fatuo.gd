@@ -1,14 +1,14 @@
 extends CharacterBody2D
 @onready var estadisticas = $Estadisticas
 @export var speed: float = 50.0  
-@export var fireball_scene: PackedScene = preload("res://bola_de_fuego.tscn")
+@export var fireball_scene: PackedScene = preload("res://disparo_de_curacion.tscn")
 @export var damage_text_scene: PackedScene = preload("res://dañito_flotante_uw_u.tscn")
 @export var distancia_optima: float = 100.0  
 @export var margen: float = 10.0  
 @export var tiempo_fallo_disparo: float = 1.5  
 var estados_activos = []
-#conjunto de estadisticas para que optenga sus facultades cada Personaje
-var stats = [400, 10, 15,20,4,6,3,10,8,3,15,18]
+
+var stats = [200, 10, 15,20,40,6,3,10,8,3,15,18,10]
 @onready var animation_player = $AnimationPlayer
 @onready var sprite = $Sprite2D  
 
@@ -90,8 +90,8 @@ func lanzar_bola_de_fuego():
 		elif direccion_disparo == Vector2.DOWN:
 			bola.rotation_degrees = 180
 			
-		var destreza = stats[3] 
-		var daño_calculado = 50 * (destreza / 10) 
+		var Inteligencia = stats[4] 
+		var daño_calculado = -10 * (Inteligencia / 10) 
 		
 		bola.set_dano(daño_calculado)
 
@@ -124,9 +124,6 @@ func take_damage(amount: int):
 		var damage_text = damage_text_scene.instantiate()
 		damage_text.position = global_position + Vector2(0, -20) 
 		get_parent().add_child(damage_text) 
-		damage_text.set_damage(amount, Color.BLUE) 
-	if vida <= 0:
-		if jugador:
-			jugador.añadir_puntos(20)
+		damage_text.set_damage(amount, Color.CRIMSON)
 		#get_tree().change_scene_to_file("res://creditos.tscn")
 		queue_free()  

@@ -1,14 +1,14 @@
 extends CharacterBody2D
 @onready var estadisticas = $Estadisticas
-@export var speed: float = 50.0  
-@export var fireball_scene: PackedScene = preload("res://bola_de_fuego.tscn")
+@export var speed: float = 20.0  
+@export var fireball_scene: PackedScene = preload("res://disparo_de_veneno.tscn")
 @export var damage_text_scene: PackedScene = preload("res://dañito_flotante_uw_u.tscn")
 @export var distancia_optima: float = 100.0  
 @export var margen: float = 10.0  
 @export var tiempo_fallo_disparo: float = 1.5  
 var estados_activos = []
-#conjunto de estadisticas para que optenga sus facultades cada Personaje
-var stats = [400, 10, 15,20,4,6,3,10,8,3,15,18]
+
+var stats = [50, 10, 15,20,4,6,3,10,8,3,15,18]
 @onready var animation_player = $AnimationPlayer
 @onready var sprite = $Sprite2D  
 
@@ -20,7 +20,7 @@ var max_fallos = 2
 
 func _ready():
 	jugador = get_tree().get_nodes_in_group("Jugador")[0] if get_tree().has_group("Jugador") else null
-	lanzar_bola_de_fuego()
+	lanzar_veneno()
 
 func _physics_process(_delta):
 	if jugador:
@@ -70,7 +70,7 @@ func actualizar_animacion():
 	elif direccion_actual == Vector2.DOWN:
 		animation_player.play("Enemigo_Abajo")
 
-func lanzar_bola_de_fuego():
+func lanzar_veneno():
 	while jugador:
 		await get_tree().create_timer(2.0).timeout  
 		
@@ -80,7 +80,7 @@ func lanzar_bola_de_fuego():
 		var bola = fireball_scene.instantiate()
 		bola.global_position = global_position
 		bola.set_direccion(direccion_disparo)
-		#Lo siguiente se encarga de boltear el sprite de la bola de fuego y tal
+		#Lo siguiente se encarga de boltear el sprite de disparo de veneno y tal
 		if direccion_disparo == Vector2.RIGHT:
 			bola.rotation_degrees = 90
 		elif direccion_disparo == Vector2.LEFT:
@@ -90,8 +90,8 @@ func lanzar_bola_de_fuego():
 		elif direccion_disparo == Vector2.DOWN:
 			bola.rotation_degrees = 180
 			
-		var destreza = stats[3] 
-		var daño_calculado = 50 * (destreza / 10) 
+		var inteligencia = stats[4] 
+		var daño_calculado = 10 * (inteligencia / 10) 
 		
 		bola.set_dano(daño_calculado)
 
@@ -124,9 +124,9 @@ func take_damage(amount: int):
 		var damage_text = damage_text_scene.instantiate()
 		damage_text.position = global_position + Vector2(0, -20) 
 		get_parent().add_child(damage_text) 
-		damage_text.set_damage(amount, Color.BLUE) 
+		damage_text.set_damage(amount, Color.BLUE)
 	if vida <= 0:
 		if jugador:
-			jugador.añadir_puntos(20)
+			jugador.añadir_puntos(10)
 		#get_tree().change_scene_to_file("res://creditos.tscn")
 		queue_free()  

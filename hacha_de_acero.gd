@@ -10,9 +10,9 @@ func _ready():
 	if animation_player:
 		animation_player.connect("animation_finished", Callable(self, "_on_animacion_terminada"))
 
-func configurar_ataque(posicion, direccion):
+func configurar_ataque(posicion, direccion,fuerza):
 	position = posicion + (direccion * 10)  
-
+	damage+=(fuerza/2)
 	if direccion == Vector2.UP:
 		rotation_degrees = 0
 	elif direccion == Vector2.DOWN:

@@ -7,8 +7,8 @@ extends CharacterBody2D
 @export var margen: float = 10.0  
 @export var tiempo_fallo_disparo: float = 1.5  
 var estados_activos = []
-#conjunto de estadisticas para que optenga sus facultades cada Personaje
-var stats = [400, 10, 15,20,4,6,3,10,8,3,15,18]
+
+var stats = [40, 10, 15,20,4,6,3,10,8,3,15,18]
 @onready var animation_player = $AnimationPlayer
 @onready var sprite = $Sprite2D  
 
@@ -124,7 +124,7 @@ func take_damage(amount: int):
 		var damage_text = damage_text_scene.instantiate()
 		damage_text.position = global_position + Vector2(0, -20) 
 		get_parent().add_child(damage_text) 
-		damage_text.set_damage(amount, Color.BLUE) 
+		damage_text.set_damage(amount, Color.BLUE)
 	if vida <= 0:
 		if jugador:
 			jugador.añadir_puntos(20)

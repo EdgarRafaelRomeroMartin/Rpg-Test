@@ -1,10 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dpkxmiqteoabb"]
+[gd_scene load_steps=7 format=3 uid="uid://bv03s45ook22e"]
 
-[ext_resource type="Script" path="res://hacha_de_acero.gd" id="1_b3166"]
-[ext_resource type="Texture2D" uid="uid://cn8svxfew5ig7" path="res://Imagenes/Armas/Hacha de acero.png" id="1_pfq57"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_a4pvv"]
-size = Vector2(62, 26)
+[ext_resource type="Texture2D" uid="uid://bmn5lybofj7l0" path="res://Imagenes/DIsparos/Lanza.png" id="1_qmfs6"]
+[ext_resource type="Script" path="res://lanza_de_hierro.gd" id="1_yhyua"]
 
 [sub_resource type="Animation" id="Animation_y0qeq"]
 resource_name = "Golpe de hacha"
@@ -43,22 +40,24 @@ _data = {
 "RESET": SubResource("Animation_g8kfk")
 }
 
-[node name="Hacha de acero" type="Area2D"]
-collision_layer = 4
-collision_mask = 2
-script = ExtResource("1_b3166")
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ktn3e"]
+size = Vector2(5.76408, 40.5517)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -17)
-shape = SubResource("RectangleShape2D_a4pvv")
+[node name="Lanza_de_hierro" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_yhyua")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-4.76837e-07, -2)
+position = Vector2(1, 0)
 rotation = -1.5708
-scale = Vector2(0.875, 0.96875)
-texture = ExtResource("1_pfq57")
+texture = ExtResource("1_qmfs6")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_13v3b")
 }
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 1.47229)
+scale = Vector2(1.90837, 1.11106)
+shape = SubResource("RectangleShape2D_ktn3e")

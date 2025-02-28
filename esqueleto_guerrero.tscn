@@ -1,11 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://cgvhxuxihw7su"]
+[gd_scene load_steps=10 format=3 uid="uid://bd2hxypta3htu"]
 
-[ext_resource type="Script" path="res://enemigo.gd" id="1_56f8r"]
-[ext_resource type="Texture2D" uid="uid://dgbeyj8uloty5" path="res://Imagenes/Personajes/Personajes/Ninja.png" id="2_u6mqp"]
-[ext_resource type="PackedScene" uid="uid://ntsu8u5ubkgt" path="res://estadisticas.tscn" id="3_d43s6"]
+[ext_resource type="Script" path="res://esqueleto_guerrero.gd" id="1_xbcax"]
+[ext_resource type="Texture2D" uid="uid://cpg7b7m31cakv" path="res://Imagenes/Personajes/Enemigos/Esqueleto.png" id="2_hyfrg"]
+[ext_resource type="PackedScene" uid="uid://ntsu8u5ubkgt" path="res://estadisticas.tscn" id="3_28e2c"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_s6lya"]
-size = Vector2(21, 31)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hm21e"]
+size = Vector2(23, 32)
 
 [sub_resource type="Animation" id="Animation_t185d"]
 resource_name = "Enemigo_Abajo"
@@ -77,31 +77,27 @@ _data = {
 "RESET": SubResource("Animation_c6t06")
 }
 
-[node name="Enemigo" type="CharacterBody2D" groups=["Enemigo"]]
-light_mask = 2
-visibility_layer = 5
+[node name="EsqueletoGuerrero" type="CharacterBody2D" groups=["Enemigo"]]
 collision_layer = 2
 collision_mask = 5
-script = ExtResource("1_56f8r")
+script = ExtResource("1_xbcax")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(1, -2)
-texture = ExtResource("2_u6mqp")
+texture = ExtResource("2_hyfrg")
 hframes = 3
 vframes = 3
 frame = 6
 region_enabled = true
 region_rect = Rect2(0, 0, 72, 96)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Enemigos"]]
-light_mask = 2
-visibility_layer = 5
-position = Vector2(0.5, -1.5)
-shape = SubResource("RectangleShape2D_s6lya")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, -2)
+shape = SubResource("RectangleShape2D_hm21e")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_yi6is")
 }
 
-[node name="Estadisticas" parent="." instance=ExtResource("3_d43s6")]
+[node name="Estadisticas" parent="." instance=ExtResource("3_28e2c")]
